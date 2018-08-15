@@ -5,7 +5,9 @@ import com.example.data.net.CubesApiService
 import com.example.data.repository.CubeRepositoryImp
 import com.example.data.repository.datasource.CubeDataStore
 import com.example.data.repository.datasource.CubeDataStoreImp
+import com.example.domain.executor.PostExecutionThread
 import com.example.domain.repository.CubeRepository
+import com.example.sfcar.cubebrowser.UIThread
 import dagger.Module
 import dagger.Provides
 import okhttp3.OkHttpClient
@@ -39,4 +41,8 @@ class CubesApiModule {
     @Provides
     @Singleton
     fun provideCubeDataSore(cubeDataStoreImp: CubeDataStoreImp) : CubeDataStore = cubeDataStoreImp
+
+    @Provides
+    @Singleton
+    fun providePostExecutionThread(uiThread: UIThread): PostExecutionThread = uiThread
 }
