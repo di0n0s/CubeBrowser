@@ -6,8 +6,11 @@ import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.example.sfcar.cubebrowser.CubeBrowserApplication
 
 import com.example.sfcar.cubebrowser.R
+import com.example.sfcar.cubebrowser.injector.modules.BaseListModule
+import com.example.sfcar.cubebrowser.injector.modules.CubeListModule
 import com.example.sfcar.cubebrowser.views.base.BaseFragment
 
 /**
@@ -25,7 +28,10 @@ class CubeListFragment : BaseFragment(), CubeListView {
     override fun layoutId(): Int = R.layout.fragment_cube_list
 
     override fun setupFragmentComponent() {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        CubeBrowserApplication
+                .applicationComponent
+                .plus(BaseListModule(this.context!!), CubeListModule(this, activity as CubeListActivity))
+                .inject(this)
     }
 
     override fun showProgressBar(show: Boolean) {
