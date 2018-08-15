@@ -10,10 +10,13 @@ import android.view.ViewGroup
 import com.example.sfcar.cubebrowser.CubeBrowserApplication
 
 import com.example.sfcar.cubebrowser.R
+import com.example.sfcar.cubebrowser.adapters.CubeListAdapter
 import com.example.sfcar.cubebrowser.entities.BoardView
+import com.example.sfcar.cubebrowser.entities.CubeView
 import com.example.sfcar.cubebrowser.entities.enumerations.EmptyViewEnum
 import com.example.sfcar.cubebrowser.injector.modules.BaseListModule
 import com.example.sfcar.cubebrowser.injector.modules.CubeListModule
+import com.example.sfcar.cubebrowser.interfaces.AdapterListOnClickListener
 import com.example.sfcar.cubebrowser.interfaces.CubeListActivityListener
 import com.example.sfcar.cubebrowser.presenters.cubeList.CubeListPresenterImp
 import com.example.sfcar.cubebrowser.views.base.BaseFragment
@@ -24,7 +27,7 @@ import javax.inject.Inject
  * A simple [Fragment] subclass.
  *
  */
-class CubeListFragment : BaseFragment(), CubeListView {
+class CubeListFragment : BaseFragment(), CubeListView, AdapterListOnClickListener.ViewListener {
 
     @Inject
     lateinit var presenter: CubeListPresenterImp
@@ -49,6 +52,26 @@ class CubeListFragment : BaseFragment(), CubeListView {
         setEmptyView()
         setRefreshingBehaviour()
         presenter.start()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        presenter.onResume()
+    }
+
+    override fun onPause() {
+        super.onPause()
+        presenter.onPause()
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        cubeListRecyclerView.adapter = null
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        presenter.onDestroy()
     }
 
     override fun layoutId(): Int = R.layout.fragment_cube_list
@@ -98,10 +121,16 @@ class CubeListFragment : BaseFragment(), CubeListView {
 
     override fun setBoardView(boardView: BoardView) {
         setToolbarTitle(boardView)
+        initAdapter(boardView.cubeList)
+        notifyDataSetChanged()
     }
 
     override fun showErrorMessage() {
         showToastMessage(getString(R.string.error_network_connection))
+    }
+
+    override fun onItemSelected(position: Int, view: View) {
+        //TODO in detail feature
     }
 
     private fun setLayoutManager() {
@@ -111,4 +140,14 @@ class CubeListFragment : BaseFragment(), CubeListView {
     private fun setToolbarTitle(boardView: BoardView) {
         activityListener.setToolbarTitle(boardView.name)
     }
+
+    private fun initAdapter(cubeViewList: ArrayList<CubeView>) {
+        if (cubeListRecyclerView.adapter == null)
+            cubeListRecyclerView.adapter = CubeListAdapter(cubeViewList, this)
+    }
+
+    private fun notifyDataSetChanged() {
+        cubeListRecyclerView.adapter.notifyDataSetChanged()
+    }
+
 }
