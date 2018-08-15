@@ -1,4 +1,4 @@
 package com.example.data.entities
 
-data class CubeResponseDto(private val id: Int?,
-                           private val url: String?)
+data class CubeResponseDto(val id: Int?,
+                           val url: String?)
