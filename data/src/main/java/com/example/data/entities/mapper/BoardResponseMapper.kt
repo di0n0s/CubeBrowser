@@ -16,7 +16,7 @@ object BoardResponseMapper {
                         getCubeList(boardResponseDto.items))
             }
         }
-        return null
+        return Board()
     }
 
     private fun getCubeList(items: List<CubeResponseDto>): ArrayList<Cube> {

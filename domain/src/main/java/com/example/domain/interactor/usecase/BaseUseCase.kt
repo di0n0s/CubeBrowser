@@ -11,8 +11,8 @@ import io.reactivex.schedulers.Schedulers
 abstract class BaseUseCase<T>(private val disposables: CompositeDisposable = CompositeDisposable(),
                               private val postExecutionThread: PostExecutionThread) {
 
-    open fun execute(params: Params, observer: DisposableObserver<T>) {
-        val observable: Observable<T> = buildUseCaseObservable(params)
+    fun execute(params: Params, observer: DisposableObserver<T>) {
+        val observable: Observable<T?> = buildUseCaseObservable(params)
                 .subscribeOn(Schedulers.io())
                 .observeOn(postExecutionThread.getScheduler())
         addDisposable(observable.subscribeWith(observer))
