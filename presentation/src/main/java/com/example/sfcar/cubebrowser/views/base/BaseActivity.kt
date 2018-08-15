@@ -17,7 +17,6 @@ abstract class BaseActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_base)
-        setSupportActionBar(toolbar)
         setupActivityComponent()
         addFragment(savedInstanceState)
     }
@@ -39,7 +38,5 @@ abstract class BaseActivity : AppCompatActivity() {
     }
 
     abstract fun fragment(): BaseFragment
-
-    abstract fun setToolbarTitle()
 
 }
