@@ -11,6 +11,6 @@ interface BaseListView {
     fun setNullAdapter()
     fun setRefreshingBehaviour()
     fun setEmptyView()
-    fun showErrorMessage(message: String?)
+    fun showErrorMessage()
 
 }

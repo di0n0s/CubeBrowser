@@ -24,7 +24,7 @@ abstract class BaseUseCase<T>(private val disposables: CompositeDisposable = Com
             disposables.dispose()
     }
 
-    protected fun addDisposable(disposable: Disposable) {
+    private fun addDisposable(disposable: Disposable) {
         checkNotNull(disposable)
         checkNotNull(disposables)
         disposables.add(disposable)
