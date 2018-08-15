@@ -2,4 +2,6 @@
     <string name="app_name">CubeBrowser</string>
     <string name="cube_list_empty_title">There are no cubes</string>
     <string name="cube_list_empty_subtitle">Pull to refresh the list</string>
+    <string name="error_network_connection">There is an error with connection</string>
+
 </resources>
