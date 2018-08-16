@@ -30,6 +30,7 @@ class CubeFragment : BaseFragment() {
     lateinit var activityListener: CubeActivityListener
 
     companion object {
+        const val TAG = "CubeFragment"
         private const val ARG_CUBE = "ARG_CUBE"
 
         fun newInstance(cubeView: CubeView): CubeFragment {
@@ -49,6 +50,7 @@ class CubeFragment : BaseFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setWebView()
+        activityListener.setToolbarTitle(presenter.cubeView.title)
     }
 
     override fun onResume() {
@@ -80,7 +82,8 @@ class CubeFragment : BaseFragment() {
         setJSEnabled()
         webView.webViewClient = object : WebViewClient() {
             override fun onPageStarted(view: WebView?, url: String?, favicon: Bitmap?) {
-                activityListener.setToolbarTitle(view?.title!!)
+                if (view?.title?.isNotBlank()!!)
+                    activityListener.setToolbarTitle(view.title!!)
             }
         }
     }

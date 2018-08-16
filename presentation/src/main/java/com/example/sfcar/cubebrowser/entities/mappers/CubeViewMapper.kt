@@ -6,5 +6,5 @@ import com.example.sfcar.cubebrowser.entities.CubeView
 object CubeViewMapper {
 
     fun toViewObject(cube: Cube): CubeView =
-            CubeView(cube.id, cube.url)
+            CubeView(id = cube.id, url = cube.url)
 }

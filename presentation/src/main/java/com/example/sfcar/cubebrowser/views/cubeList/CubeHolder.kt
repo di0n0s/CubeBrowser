@@ -18,9 +18,8 @@ class CubeHolder(itemView: View, private val adapterListener: AdapterListOnClick
     }
 
     private fun setOnClickListener() {
-        itemView.webView.setOnTouchListener { _, _ ->
-            adapterListener.onItemSelected(adapterPosition, itemView)
-            false
+        itemView.view.setOnClickListener {
+            adapterListener.onItemSelected(adapterPosition, itemView.webView)
         }
     }
 

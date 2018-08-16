@@ -4,10 +4,12 @@ import android.os.Parcel
 import android.os.Parcelable
 
 data class CubeView(val id: Int = 0,
+                    var title: String = "",
                     var url: String = "",
                     var position: Int = 0) : Parcelable {
     constructor(source: Parcel) : this(
             source.readInt(),
+            source.readString(),
             source.readString(),
             source.readInt()
     )
@@ -16,6 +18,7 @@ data class CubeView(val id: Int = 0,
 
     override fun writeToParcel(dest: Parcel, flags: Int) = with(dest) {
         writeInt(id)
+        writeString(title)
         writeString(url)
         writeInt(position)
     }

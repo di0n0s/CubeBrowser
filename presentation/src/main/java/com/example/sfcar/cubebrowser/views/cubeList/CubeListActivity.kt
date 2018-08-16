@@ -9,7 +9,10 @@ import kotlinx.android.synthetic.main.activity_base.*
 
 class CubeListActivity : BaseActivity(), CubeListActivityListener {
 
-    override fun fragment(): BaseFragment = CubeListFragment()
+    override fun createFragmentAndSettingTAG() {
+        currentFragment = CubeListFragment()
+        currentTag = CubeListFragment.TAG
+    }
 
     override fun setToolbarTitle(title: String) {
         toolbar.title = title

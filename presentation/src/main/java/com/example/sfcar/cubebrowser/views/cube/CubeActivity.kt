@@ -10,7 +10,6 @@ import com.example.sfcar.cubebrowser.R
 import com.example.sfcar.cubebrowser.entities.CubeView
 import com.example.sfcar.cubebrowser.interfaces.CubeActivityListener
 import com.example.sfcar.cubebrowser.views.base.BaseActivity
-import com.example.sfcar.cubebrowser.views.base.BaseFragment
 import kotlinx.android.synthetic.main.activity_base.*
 
 class CubeActivity : BaseActivity(), CubeActivityListener {
@@ -31,9 +30,16 @@ class CubeActivity : BaseActivity(), CubeActivityListener {
         initSupportActionBar()
     }
 
-    override fun fragment(): BaseFragment = CubeFragment.newInstance(intent.getParcelableExtra(EXTRA_CUBE))
+    override fun createFragmentAndSettingTAG() {
+        currentFragment = CubeFragment.newInstance(getCubeExtra())
+        currentTag = CubeFragment.TAG
+    }
+
+    private fun getCubeExtra(): CubeView = intent.getParcelableExtra(EXTRA_CUBE)
+
 
     override fun setToolbarTitle(title: String) {
+        toolbar.title = title
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {

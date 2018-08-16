@@ -7,6 +7,7 @@ import android.support.v7.widget.GridLayoutManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.webkit.WebView
 import com.example.sfcar.cubebrowser.CubeBrowserApplication
 import com.example.sfcar.cubebrowser.R
 import com.example.sfcar.cubebrowser.adapters.CubeListAdapter
@@ -128,6 +129,7 @@ class CubeListFragment : BaseFragment(), CubeListView, AdapterListOnClickListene
     }
 
     override fun onItemSelected(position: Int, view: View) {
+        presenter.boardView.cubeList[position].title = (view as WebView).title
         activityListener.goToCubeActivity(position, presenter.boardView.cubeList[position], view)
     }
 
