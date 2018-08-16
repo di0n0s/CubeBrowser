@@ -18,7 +18,10 @@ class CubeHolder(itemView: View, private val adapterListener: AdapterListOnClick
     }
 
     private fun setOnClickListener() {
-        itemView.setOnClickListener { adapterListener.onItemSelected(adapterPosition, itemView) }
+        itemView.webView.setOnTouchListener { _, _ ->
+            adapterListener.onItemSelected(adapterPosition, itemView)
+            false
+        }
     }
 
     private fun setUrl(cubeView: CubeView) {

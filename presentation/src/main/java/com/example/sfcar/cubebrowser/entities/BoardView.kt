@@ -3,10 +3,10 @@ package com.example.sfcar.cubebrowser.entities
 import android.os.Parcel
 import android.os.Parcelable
 
-data class BoardView(val id: Int,
-                     val name: String,
-                     val description: String,
-                     val cubeList: ArrayList<CubeView>) : Parcelable {
+data class BoardView(val id: Int = 0,
+                     val name: String = "",
+                     val description: String = "",
+                     val cubeList: ArrayList<CubeView> = ArrayList()) : Parcelable {
     constructor(source: Parcel) : this(
             source.readInt(),
             source.readString(),

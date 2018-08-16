@@ -1,6 +1,7 @@
 package com.example.sfcar.cubebrowser.views.cubeList
 
 import android.view.View
+import com.example.sfcar.cubebrowser.entities.CubeView
 import com.example.sfcar.cubebrowser.interfaces.CubeListActivityListener
 import com.example.sfcar.cubebrowser.views.base.BaseActivity
 import com.example.sfcar.cubebrowser.views.base.BaseFragment
@@ -14,7 +15,8 @@ class CubeListActivity : BaseActivity(), CubeListActivityListener {
         toolbar.title = title
     }
 
-    override fun goToCubeActivity(url: String, view: View) {
+    override fun goToCubeActivity(position: Int, cubeView: CubeView, view: View) {
+        navigator.toCube(this, position,cubeView, view)
     }
 
 }

@@ -8,10 +8,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.example.sfcar.cubebrowser.CubeBrowserApplication
-
 import com.example.sfcar.cubebrowser.R
 import com.example.sfcar.cubebrowser.adapters.CubeListAdapter
-import com.example.sfcar.cubebrowser.entities.BoardView
 import com.example.sfcar.cubebrowser.entities.CubeView
 import com.example.sfcar.cubebrowser.entities.enumerations.EmptyViewEnum
 import com.example.sfcar.cubebrowser.injector.modules.BaseListModule
@@ -119,9 +117,9 @@ class CubeListFragment : BaseFragment(), CubeListView, AdapterListOnClickListene
     override fun setEmptyView() = emptyView.fillViews(EmptyViewEnum.EMPTY_CUBE_LIST)
 
 
-    override fun setBoardView(boardView: BoardView) {
-        setToolbarTitle(boardView)
-        initAdapter(boardView.cubeList)
+    override fun setBoardView() {
+        setToolbarTitle(presenter.boardView.name)
+        initAdapter(presenter.boardView.cubeList)
         notifyDataSetChanged()
     }
 
@@ -130,15 +128,15 @@ class CubeListFragment : BaseFragment(), CubeListView, AdapterListOnClickListene
     }
 
     override fun onItemSelected(position: Int, view: View) {
-        //TODO in detail feature
+        activityListener.goToCubeActivity(position, presenter.boardView.cubeList[position], view)
     }
 
     private fun setLayoutManager() {
         cubeListRecyclerView.layoutManager = layoutManager
     }
 
-    private fun setToolbarTitle(boardView: BoardView) {
-        activityListener.setToolbarTitle(boardView.name)
+    private fun setToolbarTitle(title: String) {
+        activityListener.setToolbarTitle(title)
     }
 
     private fun initAdapter(cubeViewList: ArrayList<CubeView>) {

@@ -23,7 +23,7 @@ abstract class BaseActivity : AppCompatActivity() {
 
     private fun addFragment(savedInstanceState: Bundle?) =
             savedInstanceState
-                    ?: supportFragmentManager.inTransaction { add(fragmentContainer.id, fragment()) }
+                    ?: supportFragmentManager.inTransaction { replace(fragmentContainer.id, fragment()) }
 
     override fun onBackPressed() {
         (supportFragmentManager.findFragmentById(

@@ -3,11 +3,13 @@ package com.example.sfcar.cubebrowser.entities
 import android.os.Parcel
 import android.os.Parcelable
 
-data class CubeView(val id: Int,
-                    var url: String) : Parcelable {
+data class CubeView(val id: Int = 0,
+                    var url: String = "",
+                    var position: Int = 0) : Parcelable {
     constructor(source: Parcel) : this(
             source.readInt(),
-            source.readString()
+            source.readString(),
+            source.readInt()
     )
 
     override fun describeContents() = 0
@@ -15,6 +17,7 @@ data class CubeView(val id: Int,
     override fun writeToParcel(dest: Parcel, flags: Int) = with(dest) {
         writeInt(id)
         writeString(url)
+        writeInt(position)
     }
 
     companion object {
